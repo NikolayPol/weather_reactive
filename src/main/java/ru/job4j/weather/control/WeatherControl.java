@@ -44,4 +44,9 @@ public class WeatherControl {
     public Mono<Weather> hottest() {
         return weathers.hottest();
     }
+
+    @GetMapping(value = "/cityGreatThen/{value}")
+    public Flux<Weather> cityGreatThen(@PathVariable Integer value) {
+        return weathers.cityGreatThen(value);
+    }
 }

@@ -8,6 +8,7 @@ import ru.job4j.weather.model.Weather;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * Класс WeatherService
@@ -41,6 +42,15 @@ public class WeatherService {
                 weathers.values()
                         .stream()
                         .max(Comparator.comparing(Weather::getTemperature))
+        );
+    }
+
+    public Flux<Weather> cityGreatThen(int value) {
+        return Flux.fromIterable(
+                weathers.values()
+                        .stream()
+                        .filter(weather -> weather.getTemperature() > value)
+                        .collect(Collectors.toList())
         );
     }
 }
